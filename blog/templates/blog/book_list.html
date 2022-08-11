@@ -1,0 +1,68 @@
+{% extends "base.html" %}
+{% load blog_tags %}
+
+{% block meta %}
+<title>当前分类：{{ tag_name }}-我的书单</title>
+{% endblock %}
+
+{% block article %}
+    <div class="post-block" style="opacity: 40; display: block;">
+        <h1 align="center">当前分类：{{ tag_name }}(共{{ books | length }}本）</h1>
+        <div class="pagewrapper" style="padding-top:.1px;">
+            <div id="cardslist" class="cardlist" role="main">
+
+            {% for book in books %}
+                <!--根据本书有无读书笔记来选择是否进行跳转-->
+                {% if book.detail != "" %}
+                    <div class="card col span_1_of_4" role="main">
+                    <div class="card-item">
+                        <div class="thumb-img focus">
+                            <div class="metacat">
+                            <a class="metacat" href="">{{ book.category }}</a>
+                            </div>
+                            <a href="{{ book.get_absolute_url }}" target="_blank" title="{{ book.name }}">
+                            <img class="thumb" style="width: 190px; height: 260px; display: inline;"  alt="{{ book.name }}" src="{% url 'blog:index' %}media/{{ book.cover }}">
+                            </a>
+                        </div>
+                        <h3> <a href="{{ book.get_absolute_url }}" title="{{ book.name }}" target="_blank">{{ book.name }}</a> </h3>
+                        <p> 作者：<a href="">{{ book.author }}</a><br>
+                            豆瓣评分：{{ book.score }}<br></p>
+                    </div>
+                </div>
+                {% else %}
+                    <div class="card col span_1_of_4" role="main">
+                    <div class="card-item">
+                        <div class="thumb-img focus">
+                            <div class="metacat">
+                            <a class="metacat" href="">{{ book.category }}</a>
+                            </div>
+                            <a href="" title="{{ book.name }}">
+                            <img class="thumb" style="width: 190px; height: 260px; display: inline;"  alt="{{ book.name }}" src="{% url 'blog:index' %}media/{{ book.cover }}">
+                            </a>
+                        </div>
+                        <h3> <a href="" title="{{ book.name }}" >{{ book.name }}</a> </h3>
+                        <p> 作者：<a href="">{{ book.author }}</a><br>
+                            豆瓣评分：{{ book.score }}<br></p>
+                    </div>
+                </div>
+                {% endif %}
+            {% endfor %}
+
+            </div>
+        </div>
+    </div>
+{% endblock %}
+
+{% block tag_sidebar %}
+    <div class="siderbar" >
+        <div class="widget git_tag">
+            <div class="title"><h3>热门标签</h3></div>
+            <div class="git_tags">
+                {% get_books_tags as tags %}
+                {% for tag in tags %}
+                    <a target="_self" href="{{ tag.get_absolute_url  }}" >{{ tag.name }}</a>
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+{% endblock %}

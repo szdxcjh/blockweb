@@ -1,0 +1,91 @@
+{% extends 'base.html' %}
+{% load highlight %}
+{% load staticfiles %}
+{% load blog_tags %}
+
+{% block article %}
+    {% if query %}
+        {% for post in page.object_list%}
+            <section id="posts" class="posts-expand">
+                <article class="post post-type-normal">
+                    <div class="post-block posts-list" style="opacity: 1; display: block;">
+
+                        <!--文章标题-->
+                        <header class="post-header" style="opacity: 1; display: block; transform: translateY(0px);">
+                            <a class="label label-important" href="{% url 'blog:category' post.object.category.id %}">{{ post.object.category }}<i class="label-arrow"></i></a>
+                            <h2 class="post-title" itemprop="name headline"><a title="{{ post.object.title }}" href="{{ post.object.get_absolute_url }}" class="post-title-link" itemprop="url">{% highlight post.object.title with query %}</a></h2>
+                        </header>
+
+                        <!--文章摘要-->
+                        <div class="post-body" itemprop="articleBody" style="opacity: 1; display: block; transform: translateY(0px);">
+                              <p>{% highlight post.object.body with query %}</p>
+                        </div>
+
+                        <!--文章信息-->
+                        <div class="post-meta">
+                            <!--发表时间-->
+                            <span class="post-time">
+                                日期：{{ post.object.created_time| date:"Y-m-d" }}
+                            </span>
+
+                            <!--文章标签-->
+                            <span class="post-category">
+                                <span class="busuanzi-value" id="busuanzi_value_page_pv">标签：
+                                    {% for tag in post.object.tag.all %}
+                                        <a href="{{ tag.get_absolute_url }}">{{ tag.name }}</a>
+                                    {% endfor %}
+                                </span>
+                            </span>
+
+                            <!--阅读次数-->
+                            <span class="post-views">
+                                <span class="busuanzi-value" id="busuanzi_value_page_pv">
+                                    阅读({{ post.object.views }})
+                                </span>
+                            </span>
+
+                            <!--评论次数-->
+                            <span class="post-comments">
+                                <span class="busuanzi-value" id="busuanzi_value_page_pv">
+                                    评论({% get_comment_count post.object %})
+                                </span>
+                            </span>
+                        </div>
+
+                    </div>
+                </article>
+                    {% empty %}
+                    <div class="post-block" style="opacity: 1; display: block;">
+                        没有找到任何结果
+                    </div>
+            </section>
+        {% endfor %}
+        <nav class="pagination" style="opacity: 1; display: block;">
+
+            <!--第一页-->
+            <a class="page-style" href="?q={{ query }}&amp;?page=1"><i class="fa fa-step-backward" aria-hidden="true"></i></a>
+
+            {% if page.has_previous%}
+                <a class="page-style" href="?q={{ query }}&amp;page={{page.previous_page_number }}"><i class="fa fa-chevron-left" aria-hidden="true"></i></a>
+            {% else %}
+                <span class="end-page-style page-style"><i class="fa fa-chevron-left" aria-hidden="true"></i></span>
+            {% endif %}
+
+
+            <span class="page-style" class="current">{{ page.number }} of {{ page.paginator.num_pages }}</span>
+
+            {% if page.has_next %}
+                <a class="page-style" href="?q={{ query }}&amp;page={{ page.next_page_number }}"><i class="fa fa-chevron-right" aria-hidden="true"></i></a>
+            {% else %}
+                <span class="end-page-style page-style"><i class="fa fa-chevron-right" aria-hidden="true"></i></span>
+            {% endif %}
+
+            <!--最后一页-->
+            <a class="page-style" href="?q={{ query }}&amp;page={{ page.paginator.num_pages }}"><i class="fa fa-step-forward" aria-hidden="true"></i></a>
+
+            {% else %}
+            <div class="post-block" style="opacity: 1; display: block;height: 620px;">请输入关键词再进行搜索~</div>
+
+        </nav>
+    {% endif %}
+{% endblock %}
