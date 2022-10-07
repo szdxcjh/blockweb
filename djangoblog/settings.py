@@ -146,7 +146,7 @@ DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
         'NAME': 'django',
-        'USER':'root',
+        'USER':'cjh',
         'PASSWORD':'root',
         'PORT':'3306',
         'HOST':'localhost',
@@ -155,7 +155,7 @@ DATABASES = {
 
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['*']
 
 # Password validation
 # https://docs.djangoproject.com/en/2.1/ref/settings/#auth-password-validators

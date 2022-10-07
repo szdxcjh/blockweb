@@ -489,7 +489,7 @@ body {
   margin: 0 auto;
   padding: 100px 0 70px;
   width: calc(100% - 20px);
-  height:430px;
+  height:105.5px;
 }
 @media (min-width: 1200px) {
   .container .header-inner {

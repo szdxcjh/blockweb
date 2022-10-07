@@ -108,7 +108,7 @@
 
         <!--页面主体区域-->
         <main id="main" class="main">
-            <div class="all_content">
+		<div class="all_content">
                 <div class="main-inner">
                 <!--页面右侧-->
                 <div class="content-wrap">
@@ -206,7 +206,7 @@
 
                 <!--左侧侧边栏-->
                 <div class = "content-siderbar">
-
+		    <div style="min-height:100px"></div>
 
                     {% block sidebar %}
                         {% block toc_sidebar %}{% endblock %}
@@ -214,12 +214,14 @@
                         {% block social_sidebar %}
                             <div class="siderbar">
                                 <div class="title"><h3>社交账号</h3>
-                                    <div class="social">
-                                        <a target="_blank" href="https://github.com/szdxcjh"><div class="social-media"><i class="fa fa-github fa-3x social-github" aria-hidden="true"></i></div></a>
-                                        <a target="_blank" href="https://twitter.com/Terry20018895"><div class="social-media"><i class="fa fa-twitter-square fa-3x social-github" aria-hidden="true"></i></div></a>
-                                        <a target="_blank" href="https://www.zhihu.com/people/chen-jia-huan-42-88"><div class="social-media"><i class="fa  fa-3x social-item" aria-hidden="true"><span class="social-font">知</span></i></div></a>
-                                        <a target="_blank" href="tencent://AddContact/?fromId=50&fromSubId=1&subcmd=all&uin=763159721"><div class="social-media"><i class="fa fa-qq fa-3x social-item" aria-hidden="true"></i></div></a>
-                                    </div>
+					<div class="social">
+					<nobr>
+                                        <a target="_blank" href="https://github.com/szdxcjh"><i class="fa fa-github fa-3x social-github" aria-hidden="true"></i></a>
+                                        <a target="_blank" href="https://twitter.com/Terry20018895"><i class="fa fa-twitter-square fa-3x social-github" aria-hidden="true"></i></a>
+                                        <a target="_blank" href="https://www.zhihu.com/people/chen-jia-huan-42-88"><i class="fa  fa-3x social-item" aria-hidden="true"><span class="social-font">知</span></i></a>
+                                        <a target="_blank" href="tencent://AddContact/?fromId=50&fromSubId=1&subcmd=all&uin=763159721"><i class="fa fa-qq fa-3x social-item" aria-hidden="true"></i></a>
+                                    	</nobr>
+					</div>
                                 </div>
                         </div>
                         {% endblock %}
@@ -257,8 +259,19 @@
             </div>
         </main>
 
-        <!--底部信息-->
+	<!--底部信息-->
+	<div class="footer-inner main-inner">
         <footer id="footer" class="footer">
+	    	<div class="footer-col">
+		<div class="content">
+			<!--
+                        <h4 align="center">备案号</h4>
+			-->
+			<p style="text-align: center"><a href="https://beian.miit.gov.cn/" target="_blank">备案号:粤ICP备2022104337号</a></p>
+            	</div>
+	    	</div>
+	</div>
+	    <!--
             <div class="footer-inner main-inner">
                 <div class="footer-col">
                         <div class="content">
@@ -276,15 +289,16 @@
                 </div>
                 <div class="footer-col">
                     <div class="content">
-                        <h4 class="title">友情链接</h4>
-                        <p><a href="https://www.baidu.com/" target="_blank">我的个人网站</a></p>
+                        <h4 class="title">备案号</h4>
+                        <p><a href="https://beian.miit.gov.cn/" target="_blank">粤ICP备2022104337号</a></p>
                     </div>
                 </div>
             </div>
             <div class="footer-bottom">
-            </div>
+	    </div>
+	    -->
         </footer>
-
+	
     </div>
     <script src="{% static '/blog/js/index.js' %}"></script>
     <script src="{% static '/blog/js/velocity.ui.min.js' %}"></script>
